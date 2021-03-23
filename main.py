@@ -10,6 +10,8 @@ s.add_dim()
 s.add_dim()
 s.add_dim()
 s.add_dim()
+s.add_dim()
+s.add_dim()
 
 
 for e in s.basis:
@@ -17,7 +19,7 @@ for e in s.basis:
 
 f = np.sin
 sin_poly = s.project_trapz(f, 0.000001)
-print(sin_poly)
+print(f"sin(x) = {sin_poly}")
 x = np.arange(-np.pi, +np.pi, 0.1)
 y1 = f(x)
 y2 = sin_poly(x)
