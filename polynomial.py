@@ -55,6 +55,10 @@ class InnerProdSubspace:
             # domain=(-np.inf, +np.inf),
             # window=(-np.inf, +np.inf),
         )
+        x = np.append(np.arange(self.domain[0], self.domain[1], dx), [self.domain[1]])
+        fx = f(x)
         for e in self.basis:
-            poly += self.inner_prod_trapz(f, e, dx) * e
+            y = fx * e(x)
+            inner_prod = np.trapz(y=y, x=x)
+            poly += inner_prod * e
         return poly
