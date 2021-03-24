@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Iterator
 
 import numpy as np
 from numpy.polynomial import Polynomial, polynomial as P
@@ -38,13 +38,7 @@ class InnerProdSubspace:
         poly /= np.sqrt(self.inner_prod(poly, poly))
         self.basis.append(poly)
 
-    def inner_prod_trapz(self, func1: Callable[[np.ndarray, ], np.ndarray], func2: Callable[[np.ndarray, ], np.ndarray],
-                         dx: float = 1e-3) -> float:
-        x = np.append(np.arange(self.domain[0], self.domain[1], dx), [self.domain[1]])
-        y = func1(x) * func2(x)
-        return np.trapz(y=y, x=x)
-
-    def project_trapz(self, f: Callable[[np.ndarray, ], np.ndarray], dx: float = 1e-3) -> Polynomial:
+    def project(self, f: Callable[[np.ndarray, ], np.ndarray], dx: float = 1e-3) -> Iterator[Polynomial]:
         """
         project a real function to the subspace using the composite trapezoidal rule
         https://numpy.org/doc/stable/reference/generated/numpy.trapz.html#numpy.trapz
@@ -57,8 +51,13 @@ class InnerProdSubspace:
         )
         x = np.append(np.arange(self.domain[0], self.domain[1], dx), [self.domain[1]])
         fx = f(x)
-        for e in self.basis:
+        i = 0
+        while True:
+            if self.dim() <= i:
+                self.add_dim()
+            e = self.basis[i]
             y = fx * e(x)
             inner_prod = np.trapz(y=y, x=x)
             poly += inner_prod * e
-        return poly
+            yield poly
+            i += 1
