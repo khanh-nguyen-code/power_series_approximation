@@ -6,7 +6,7 @@ from numpy.polynomial import Polynomial, polynomial as P
 
 class InnerProdSubspace:
     """
-    class represents an orthogonal basis with respect to \int_{a}^{b} f(x)g(x)dx where [a, b] is the domain
+    class represents an orthogonal basis of the real inner product space of polynomials with respect to inner product \int_{a}^{b} f(x)g(x)dx where [a, b] is the domain
     generating using Gram-Schmidt Process on 1, x, x^2, x^3, ...
     """
     basis: list[Polynomial]
