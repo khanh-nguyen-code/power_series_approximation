@@ -1,4 +1,4 @@
-from typing import Callable, Iterator
+from typing import Callable, Iterator, List, Tuple
 
 import numpy as np
 from numpy.polynomial import Polynomial, polynomial as P
@@ -9,10 +9,10 @@ class InnerProdSubspace:
     class represents an orthogonal basis with respect to \int_{a}^{b} f(x)g(x)dx where [a, b] is the domain
     generating using Gram-Schmidt Process on 1, x, x^2, x^3, ...
     """
-    basis: list[Polynomial]
-    domain: tuple[float, float]
+    basis: List[Polynomial]
+    domain: Tuple[float, float]
 
-    def __init__(self, domain: tuple[float, float] = (-1, +1)):
+    def __init__(self, domain: Tuple[float, float] = (-1, +1)):
         self.basis = []
         self.domain = domain
 
