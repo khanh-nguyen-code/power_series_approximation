@@ -1,13 +1,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from polynomial import InnerProductSpace
+from basis import GramSchmidt
 
 if __name__ == "__main__":
     np.seterr(all="raise")
 
     domain = (-4*np.pi, +4*np.pi)
 
-    s = InnerProductSpace(domain=domain)
+    s = GramSchmidt(domain=domain)
     f = np.sin
 
     for dim, sin_approx in enumerate(s.project(f, 0.001)):

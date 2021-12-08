@@ -12,7 +12,12 @@ def count_iter() -> Iterable[int]:
         yield i
 
 
-class InnerProductSpace:
+class Basis:
+    def project(self, f: Callable[[np.ndarray, ], np.ndarray], dx: float = 1e-3) -> Iterable[Polynomial]:
+        raise NotImplemented
+
+
+class GramSchmidt(Basis):
     """
     class represents an orthogonal basis of the real inner product space of polynomials with respect to
     the inner product \\int_{a}^{b} f(x)g(x)dx where [a, b] is the interval domain.
@@ -23,6 +28,7 @@ class InnerProductSpace:
     domain: Tuple[float, float]
 
     def __init__(self, domain: Tuple[float, float] = (-1, +1)):
+        super(GramSchmidt, self).__init__()
         self.vector_list = []
         self.domain = domain
 
