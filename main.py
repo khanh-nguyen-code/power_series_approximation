@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from basis import GramSchmidt
+from basis import GramSchmidt, Chebyshev
 
 if __name__ == "__main__":
     np.seterr(all="raise")
@@ -16,7 +16,6 @@ if __name__ == "__main__":
         y2 = sin_approx(x)
         plt.plot(x, y1, "r")
         plt.plot(x, y2, "b")
-        plt.ylim(-2, +2)
         plt.title(f"dim {dim}")
         print(f"dim {dim}: {sin_approx}")
         plt.show()
