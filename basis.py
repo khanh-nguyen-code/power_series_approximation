@@ -40,7 +40,7 @@ class Basis:
         https://en.wikipedia.org/wiki/Trapezoidal_rule
         yield the projected polynomials
         """
-        poly = Polynomial(coef=[0.0, ])
+        poly = Polynomial(coef=[0, ])
         yield poly
 
         x_arr = np.append(np.arange(self.domain[0], self.domain[1], dx), [self.domain[1]])
@@ -62,7 +62,7 @@ class GramSchmidt(Basis):
     """
 
     def add_vector(self):
-        poly = Polynomial(coef=[0.0 for _ in range(len(self.vector_list))] + [1.0, ])
+        poly = Polynomial(coef=[0 for _ in range(len(self.vector_list))] + [1, ])
         for e in self.vector_list:
             poly -= self.inner_product(poly, e) * e
         poly /= np.sqrt(self.inner_product(poly, poly))
